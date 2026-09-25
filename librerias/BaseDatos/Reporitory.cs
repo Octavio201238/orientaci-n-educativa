@@ -1,8 +1,10 @@
+using MongoDB.Driver;
+
 namespace BaseDatos;
 
 public abstract class Repository
 {
-    public Repository (IMongoClient client, 10 Ptions<MongoDbSettings> options)
+    public Repository (IMongoClient client, IOptions<MongoDbSettings> options)
     {
         
     }
