@@ -16,7 +16,7 @@ private readonly DocentesRepository repository;
     [HttpGet]
     public async Task<IActionResult>ListarDocentes()
     {
-        var docentes = await this.repository.ListarTodos();
-        return (docentes);
+        await repository.ListarTodos();
+        return Ok();
     }
 }
