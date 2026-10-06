@@ -1,3 +1,4 @@
+using BaseDatos.Repositories;
 using MongoDB.Driver;
 using System.Collections.Generic;
 
@@ -18,6 +19,21 @@ namespace BaseDatos
         public List<Docente> Listar()
         {
             return docentes.Find(_ => true).ToList();
+        }
+
+        public async Task ListarDocentes()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task ListarTodos()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static implicit operator DocentesRepository(AlumnosRepository v)
+        {
+            throw new NotImplementedException();
         }
     }
 }
