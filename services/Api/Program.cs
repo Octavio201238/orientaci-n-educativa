@@ -1,4 +1,5 @@
 using Basedatos;
+using BaseDatos;
 using BaseDatos.Repositories;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.Extensions.Options;
@@ -28,6 +29,7 @@ builder.Services.AddSingleton<IMongoClient>(sp =>
 
 // Configurar repositorios
 builder.Services.AddTransient<AlumnosRepository>(); 
+builder.Services.AddTransient<DocentesRepository>();
 // Fin repositorios 
 var app = builder.Build();
 

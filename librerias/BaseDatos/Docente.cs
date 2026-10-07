@@ -1,32 +1,20 @@
 using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
 
-namespace BaseDatos
+namespace BaseDatos.Documents;
+
+public class Docente
 {
-    public class Docente
-    {
-        [BsonElement("NumControl")]
-        public long NumControl { get; set; }
+    public ObjectId Id { get; set; }
+    public long NumControl { get; set; }
 
-        [BsonElement("Paterno")]
-        public required string Paterno { get; set; }
+    public string Paterno { get; set; } = string.Empty;
 
-        [BsonElement("Materno")]
-        public required string Materno { get; set; }
+    public string Materno { get; set; } = string.Empty;
 
-        [BsonElement("Nombre")]
-        public required string Nombre { get; set; }
+    public string Nombre { get; set; } = string.Empty;
 
-        [BsonElement("Generacion")]
-        public int Generacion { get; set; }
+    public string Materia { get; set; } = string.Empty;
 
-        [BsonElement("Carrera")]
-        public required string Carrera { get; set; }
+    public string Turno { get; set; } = string.Empty;
 
-        [BsonElement("Semestre")]
-        public int Semestre { get; set; }
-
-        [BsonElement("Grupo")]
-        public required string Grupo { get; set; }
-    }
 }
