@@ -19,4 +19,12 @@ public async Task<List<Alumno>> ListarTodos()
         var alumnos = await this.alumnos.FindAsync(x => true);
        return alumnos.ToList(); 
     }
+
+public async Task<Alumno?> ObtenerAlumnoPorNumeroDeControl(long numControl)
+    {
+        var respuesta = await this.alumnos.FindAsync(x => x.NumControl == numControl);
+        var alumno = await respuesta.FirstOrDefaultAsync();
+
+        return alumno;
+    }
 }

@@ -41,7 +41,7 @@ public class AlumnosRepositoryTest
         disposable.Dispose();
         }
     }
-
+[Test]
     public async  Task ObtieneDatosAlumnos()
     {
         var repository = this.serviceProvider.GetRequiredService<AlumnosRepository>();
@@ -50,5 +50,23 @@ public class AlumnosRepositoryTest
         int cuantosAlumnos = list.Count;
         Assert.That(cuantosAlumnos > 0, "No contiene alumnos");
         Assert.That(cuantosAlumnos == 51, "No se trajo todos los registros");
+    }
+[Test]
+    public async Task ObtieneUnAlumnoYValidaSuNombre()
+    {
+        long numControl = 25328051050267;
+        string apellido = "Ortega";
+        var repository = this.serviceProvider.GetRequiredService<AlumnosRepository>();
+        var alumno = await repository.ObtenerAlumnoPorNumeroDeControl(numControl);
+
+        Assert.That(alumno is not null, $"No existe un alumno con el numero de control {numControl}");
+        if(alumno != null)
+        {
+            Assert.That
+            (string.Equals(alumno.Paterno, "Ortega",
+             StringComparison.OrdinalIgnoreCase),
+              $"El apellido esperado es {apellido} y el registro obtuvo {alumno.Paterno}");
+            
+        }
     }
 }

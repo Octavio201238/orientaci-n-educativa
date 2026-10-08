@@ -43,11 +43,11 @@ public class DocentesRepositoryTest
         }
     }
 
-    public void ObtieneDatosDocentes()
+    [Test]
+    public async Task ObtieneDatosDocentes()
     {
         var repository = this.serviceProvider.GetRequiredService<DocentesRepository>();
-        var list = repository.Listar();
-
+        var list = await repository.ListarTodos();
         int cuantosDocentes = list.Count;
         Assert.That(cuantosDocentes > 0, "No contiene Docentes");
         Assert.That(cuantosDocentes == 10, "No se trajo todos los registros");
