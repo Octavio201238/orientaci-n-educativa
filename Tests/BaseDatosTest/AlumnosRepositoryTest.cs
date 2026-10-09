@@ -1,4 +1,5 @@
 using Basedatos;
+using BaseDatos;
 using BaseDatos.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,8 +11,11 @@ namespace BaseDatosTest;
 public class AlumnosRepositoryTest
 {
     private IServiceProvider serviceProvider;
+
+
+
     [SetUp]
-    public void Setup()
+    public void SetUp()
     {
         var configuration = new ConfigurationBuilder()
         .SetBasePath(Directory.GetCurrentDirectory())
@@ -19,54 +23,69 @@ public class AlumnosRepositoryTest
         .Build();
 
         var services = new ServiceCollection();
-        services.AddSingleton<IConfiguration>(configuration);
+        services.AddSingleton<IConfiguration>(configuration); 
         services.Configure<MongoDbSettings>(configuration.GetSection("MongoDb"));
 
-    services.AddSingleton<IMongoClient>(sp =>
-    {
-        var settings = sp.GetRequiredService<IOptions<MongoDbSettings>>().Value;
-        return new MongoClient(settings.ConnectionString);
-    });
-    
-    
-    services.AddTransient<AlumnosRepository>();
-
-    this.serviceProvider = services.BuildServiceProvider();
-}
-   [TearDown]
-   public void TearDown()
-    {
-        if(this.serviceProvider is  IDisposable disposable)
+        services.AddSingleton<IMongoClient>(sp =>
         {
-        disposable.Dispose();
-        }
+            var settings = sp.GetRequiredService<IOptions<MongoDbSettings>>().Value;
+            return new MongoClient (settings.ConnectionString);
+        });
+
+        services.AddTransient<AlumnosRepository>();
+
+        this.serviceProvider = services.BuildServiceProvider();
     }
-[Test]
-    public async  Task ObtieneDatosAlumnos()
+
+    [TearDown]
+    public void TearDown()
     {
-        var repository = this.serviceProvider.GetRequiredService<AlumnosRepository>();
+        if(this.serviceProvider is IDisposable disposable)
+        {
+            disposable.Dispose();
+        }
+
+    }
+    [Test]
+
+    public async Task ObtieneDatosDeAlumnos()
+    {
+        var repository =  this.serviceProvider.GetRequiredService<AlumnosRepository>();
         var list = await repository.ListarTodos();
 
         int cuantosAlumnos = list.Count;
         Assert.That(cuantosAlumnos > 0, "No contiene alumnos");
         Assert.That(cuantosAlumnos == 51, "No se trajo todos los registros");
     }
-[Test]
-    public async Task ObtieneUnAlumnoYValidaSuNombre()
+    
+    [Test]
+    public async Task ObtieneUnAlumnoYValidaSuNombre_200_OK()
     {
         long numControl = 25328051050267;
         string apellido = "Ortega";
-        var repository = this.serviceProvider.GetRequiredService<AlumnosRepository>();
+
+        var repository =  this.serviceProvider.GetRequiredService<AlumnosRepository>();
         var alumno = await repository.ObtenerAlumnoPorNumeroDeControl(numControl);
 
-        Assert.That(alumno is not null, $"No existe un alumno con el numero de control {numControl}");
+        Assert.That(alumno is not null, $"No existe un alumno con el numero de comtrol {numControl}");
         if(alumno != null)
         {
-            Assert.That
-            (string.Equals(alumno.Paterno, "Ortega",
-             StringComparison.OrdinalIgnoreCase),
-              $"El apellido esperado es {apellido} y el registro obtuvo {alumno.Paterno}");
-            
+            Assert.That(string.Equals(alumno.Paterno, "Ortega",
+            StringComparison.OrdinalIgnoreCase),
+            $"El apellido esperado es {apellido} y el registro obtuvo {alumno.Paterno}");
         }
     }
+    [Test]
+    public async Task BuscaUnAlumnoYObtiene_404_NotFound()
+    {
+        long numControl = 25328051050267;
+        var repository =  this.serviceProvider.GetRequiredService<AlumnosRepository>();
+        var alumno = await repository.ObtenerAlumnoPorNumeroDeControl(numControl);
+
+        Assert.That(alumno is null, "El alumno existe y no deberia existir");
+
+    }
+
+
 }
+

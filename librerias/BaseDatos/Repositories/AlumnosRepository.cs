@@ -10,7 +10,7 @@ public class AlumnosRepository : Repository
     private readonly IMongoCollection<Alumno> alumnos;
     public AlumnosRepository(IMongoClient client, IOptions<MongoDbSettings> options) : base(client, options)
     {
-        var db = client.GetDatabase(options.Value.DatabaseName);
+        var db = client.GetDatabase(name: options.Value.DatabaseName);
         this.alumnos = db.GetCollection<Alumno>("alumnos");
     }
      
