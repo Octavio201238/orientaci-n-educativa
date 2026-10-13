@@ -1,7 +1,7 @@
 using Basedatos;
 using BaseDatos;
 using BaseDatos.Repositories;
-using Microsoft.AspNetCore.Http.Json;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
@@ -13,7 +13,7 @@ builder.Services.AddCors(cors =>
     cors.AddPolicy("todos", policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 });
 
-builder.Services.Configure<JsonOptions>(options => options.SerializerOptions.PropertyNamingPolicy = null);
+builder.Services.Configure<JsonOptions>(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
