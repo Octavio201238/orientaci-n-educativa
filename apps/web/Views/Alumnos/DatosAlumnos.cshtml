@@ -1,0 +1,45 @@
+@{
+    string numControl = "";
+if (ViewData[index:"NumControl"] != null )
+    {
+        numControl = ViewData[index:"NumControl"].ToString();
+    }
+}
+
+<h1>Informacion del Alumno @numControl</h1>
+<input type="hidden" value="@numControl" />
+<div class="container">
+  <div class="row">
+     <div class="col-sm-4"> Izquierda</div>
+
+     <div class="col-sm-8">Derecha
+
+       <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <div class="h5">Pases de Salida</div>
+            <div>
+                <button class="btn btn-primary">Nuevo</button>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Motivo</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="4">No hay registros para mostrar</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+       </div>
+     
+     </div>
+  </div>
+</div>
