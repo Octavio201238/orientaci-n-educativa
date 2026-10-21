@@ -6,13 +6,113 @@ if (ViewData[index:"NumControl"] != null )
     }
 }
 
+@section Header {
+       <link rel="stylesheet" href="~/css/credencial.css" asp-append-version="true" />
+}
+
+@section Scripts{
+    <script src="~/js/datos-alumnos.js" ></script>
+}
+
 <h1>Informacion del Alumno @numControl</h1>
-<input type="hidden" value="@numControl" />
+<input type="hidden" value="@numControl" id="hidNumControl" />
 <div class="container">
   <div class="row">
-     <div class="col-sm-4"> Izquierda</div>
+     <div class="col-sm-4"> 
+      <!-- Este es el codigo que me dio ChatGpt-->
 
-     <div class="col-sm-8">Derecha
+    <div class="credencial">
+
+        <!-- Encabezado -->
+        <header class="encabezado">
+            <div class="escudo">E</div>
+
+            <div>
+                <h2>CREDENCIAL ESCOLAR</h2>
+                <p>EDUCACIÓN MEDIA SUPERIOR</p>
+                <p>CICLO ESCOLAR 2026-2027</p>
+            </div>
+        </header>
+
+        <!-- Datos del alumno -->
+        <main class="contenido">
+
+            <div class="datos-principales">
+
+                <!-- Coloca tu foto en la misma carpeta -->
+                <img
+                    class="foto"
+                    src="foto.jpg"
+                    alt="Fotografía del alumno"
+                >
+
+                <div class="informacion">
+                    <p class="etiqueta">NOMBRE COMPLETO</p>
+                    <p class="valor" data-bind="text:nombre">
+                      
+                    </p>
+
+                    <hr class="separador">
+
+                    <p class="etiqueta">NUMERO DE CONTROL</p>
+                    <p class="valor" data-bind="text: numControl"></p>
+                </div>
+
+            </div>
+
+            <hr class="separador">
+
+            <!-- Carrera -->
+            <div class="dato">
+                <p class="etiqueta">CARRERA / ESPECIALIDAD</p>
+                <p class="valor" data-bind="text: carrera"></p>
+            </div>
+
+            <!-- Semestre y grupo -->
+            <div class="fila">
+
+                <div class="cuadro">
+                    <p class="etiqueta">SEMESTRE</p>
+                    <p class="valor" data-bind="text: semestre"></p>
+                </div>
+
+                <div class="cuadro">
+                    <p class="etiqueta">GRUPO</p>
+                    <p class="valor" data-bind="text: grupo"></p>
+                </div>
+
+            </div>
+
+            <!-- Generación -->
+            <div class="generacion">
+
+                <div>
+                    <p class="etiqueta">GENERACIÓN</p>
+                    <p class="valor" data-bind="text: generacion"></p>
+                </div>
+
+                <div class="icono-alumno">
+                    &#9813;
+                    <p>ALUMNO</p>
+                </div>
+
+            </div>
+
+            <p class="aviso">EJEMPLO DEMOSTRATIVO</p>
+
+        </main>
+
+        <!-- Pie de la credencial -->
+        <footer class="pie">
+            IDENTIFICACIÓN ESCOLAR · SIN VALIDEZ OFICIAL
+        </footer>
+
+    </div>
+
+      <!--fin chatgpt-->
+     </div>
+
+     <div class="col-sm-8">
 
        <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
