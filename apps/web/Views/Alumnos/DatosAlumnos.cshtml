@@ -15,6 +15,8 @@ if (ViewData[index:"NumControl"] != null )
 }
 
 <h1>Informacion del Alumno @numControl</h1>
+<p><a href="~/alumnos">Listado de alumnos</a></p>
+
 <input type="hidden" value="@numControl" id="hidNumControl" />
 <div class="container">
   <div class="row">
@@ -28,9 +30,7 @@ if (ViewData[index:"NumControl"] != null )
             <div class="escudo">E</div>
 
             <div>
-                <h2>CREDENCIAL ESCOLAR</h2>
-                <p>EDUCACIÓN MEDIA SUPERIOR</p>
-                <p>CICLO ESCOLAR 2026-2027</p>
+                <h2>Centro de Bachillerato Tecnológico Industrial y de Servicios No. 105</h2>
             </div>
         </header>
 
@@ -42,7 +42,7 @@ if (ViewData[index:"NumControl"] != null )
                 <!-- Coloca tu foto en la misma carpeta -->
                 <img
                     class="foto"
-                    src="foto.jpg"
+                    src="~/imagenes/alumno.jpg"
                     alt="Fotografía del alumno"
                 >
 
@@ -98,13 +98,13 @@ if (ViewData[index:"NumControl"] != null )
 
             </div>
 
-            <p class="aviso">EJEMPLO DEMOSTRATIVO</p>
+            <p class="aviso">Identificacion Escolar</p>
 
         </main>
 
         <!-- Pie de la credencial -->
         <footer class="pie">
-            IDENTIFICACIÓN ESCOLAR · SIN VALIDEZ OFICIAL
+           Cambiar fotografia
         </footer>
 
     </div>
