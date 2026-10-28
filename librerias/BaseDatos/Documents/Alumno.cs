@@ -20,4 +20,5 @@ public string Carrera { get; set; } = string.Empty;
 public int Semestre { get; set; }
 
 public string Grupo { get; set; } = string.Empty;
+public string? Foto { get; set; }
 }
