@@ -20,7 +20,7 @@ public class AlumnosController : BaseApiController
     var alumnos = await this.repository.ListarTodos();
         alumnos.ForEach(x =>
         {
-            if (string.IsNullOrEmpty(x.Foto))
+            if (!string.IsNullOrEmpty(x.Foto))
             {
                 x.Foto = $"{FOTOS_ALUMNOS}{x.Foto}";
             }
@@ -76,7 +76,7 @@ public class AlumnosController : BaseApiController
         
         //Actualizar la foto del alumno
         await this.repository.ActualizarFoto(numControl,$"{numControl}{extensionArchivo}");
-        return NoContent();
+        return Ok(FOTOS_ALUMNOS + $"{numControl}{extensionArchivo}");
     }
     
     [HttpDelete("{numControl:long}/foto")]

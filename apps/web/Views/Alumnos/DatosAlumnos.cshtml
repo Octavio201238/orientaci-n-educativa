@@ -43,7 +43,8 @@ if (ViewData[index:"NumControl"] != null )
                 <img
                     class="foto"
                     src="~/imagenes/alumno.jpg"
-                    alt="Fotografía del alumno"
+                    alt="Fotografia del alumno"
+                    data-bind="attr: {src: fotografia}">
                 >
 
                 <div class="informacion">
@@ -103,11 +104,12 @@ if (ViewData[index:"NumControl"] != null )
         </main>
 
         <!-- Pie de la credencial -->
-        <footer class="pie">
-           Cambiar fotografia
-        </footer>
+        <div class="pie">
+          <button data-bind="click: abrirSelectorFoto">Cambiar fotografia</button>
+        <button data-bind="click: eliminarFoto">Eliminar fotografia</button>
 
     </div>
+    <input type="file" id="archivo" />
 
       <!--fin chatgpt-->
      </div>

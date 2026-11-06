@@ -10,6 +10,7 @@ function DatosAlumnoViewModel()
     const self = this;
 
    const hidNumControl = document.getElementById("hidNumControl");
+   const archivo = document.getElementById("archivo");
 
    this.numControl = ko.observable(hidNumControl.value);
    this.nombre = ko.observable();
@@ -23,6 +24,41 @@ this.init = () => {
 obtenerAlumno();
 };
 
+this.eliminarFoto = async () => {
+ const url = "http://localhost:5000/alumnos/" + self.numControl() + "/foto";
+ const resp = await fetch(url, {
+  method: "DELETE"
+ });
+
+ if(resp.ok){
+  self.fotografia("");
+   self.fotografia("/imagenes/alumno.jpg");
+ }
+};
+
+this.abrirSelectorFoto = () => {
+  archivo.click();
+}
+
+this.cambiarFoto = async () => {
+  if(!archivo.value){
+    return;
+  }
+  const data = new FormData();
+  data.append("archivo", archivo.files[0]);
+
+ const url = "http://localhost:5000/alumnos/" + self.numControl() + "/foto";
+ const resp = await fetch(url, {
+  method: "PATCH",
+  body: data 
+ });
+
+ if(resp.ok){
+  const urlFoto = await resp.text();
+  self.fotografia(urlFoto);
+ }
+};
+
 const obtenerAlumno = async () => {
 const resp = await fetch("http://localhost:5000/alumnos/" + self.numControl());
 if(resp.ok){
@@ -34,6 +70,12 @@ self.generacion(alumno.Generacion + "-" + generacionFin);
 self.carrera(alumno.Carrera);
 self.semestre(alumno.Semestre);
 self.grupo(alumno.Grupo);
+if(alumno.Foto){
+  self.fotografia(alumno.Foto);
+}
+else{
+  self.fotografia("/imagenes/alumno.jpg");
+}
   }
  }
-}
+} 
