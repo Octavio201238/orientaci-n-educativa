@@ -22,6 +22,8 @@ function DatosAlumnoViewModel()
 
 this.init = () => {
 obtenerAlumno();
+
+archivo.addEventListener("change", self.cambiarFoto);
 };
 
 this.eliminarFoto = async () => {
@@ -55,7 +57,9 @@ this.cambiarFoto = async () => {
 
  if(resp.ok){
   const urlFoto = await resp.text();
-  self.fotografia(urlFoto);
+  const t = new Date().getTime();
+  self.fotografia(urlFoto + "?t=" + t);
+  archivo.value = "";
  }
 };
 
